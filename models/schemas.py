@@ -65,3 +65,35 @@ class TweetUpdate(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+"""
+Hashtag schemas
+"""
+
+
+class HashtagRead(BaseModel):
+    id: int
+    name: str
+    created_at: datetime.date
+    updated_at: datetime.date
+
+    class Config:
+        orm_mode = True
+
+
+class HashtagCreate(BaseModel):
+    name: str
+    created_at: datetime.date
+    updated_at: datetime.date
+
+    class Config:
+        orm_mode = True
+
+
+class HashtagUpdate(BaseModel):
+    name: str
+    updated_at: datetime.date
+
+    class Config:
+        orm_mode = True
