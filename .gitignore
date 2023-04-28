@@ -162,3 +162,5 @@ cython_debug/
 /alembic.ini
 /poetry.lock
 /pyproject.toml
+/utils/config.txt
+/requirements.txt
