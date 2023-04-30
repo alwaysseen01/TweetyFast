@@ -1,8 +1,8 @@
-"""empty message
+"""update models for auth app
 
-Revision ID: 0245068bb748
+Revision ID: 1659644acc6c
 Revises: 
-Create Date: 2023-04-28 18:45:52.426079
+Create Date: 2023-04-30 20:21:10.865653
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '0245068bb748'
+revision = '1659644acc6c'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -21,8 +21,8 @@ def upgrade() -> None:
     op.create_table('hashtags',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=128), nullable=False),
-    sa.Column('created_at', sa.DateTime(), nullable=False),
-    sa.Column('updated_at', sa.DateTime(), nullable=False),
+    sa.Column('created_at', sa.TIMESTAMP(), nullable=False),
+    sa.Column('updated_at', sa.TIMESTAMP(), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_hashtags_name'), 'hashtags', ['name'], unique=True)
@@ -30,8 +30,11 @@ def upgrade() -> None:
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('username', sa.String(length=50), nullable=False),
     sa.Column('email', sa.String(length=256), nullable=False),
-    sa.Column('password', sa.String(length=100), nullable=False),
-    sa.Column('registered_at', sa.DateTime(), nullable=False),
+    sa.Column('hashed_password', sa.String(length=1024), nullable=False),
+    sa.Column('registered_at', sa.TIMESTAMP(), nullable=False),
+    sa.Column('is_active', sa.Boolean(), nullable=False),
+    sa.Column('is_superuser', sa.Boolean(), nullable=False),
+    sa.Column('is_verified', sa.Boolean(), nullable=False),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('username')
@@ -40,7 +43,7 @@ def upgrade() -> None:
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('text', sa.String(length=280), nullable=False),
-    sa.Column('created_at', sa.DateTime(), nullable=False),
+    sa.Column('created_at', sa.TIMESTAMP(), nullable=False),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )

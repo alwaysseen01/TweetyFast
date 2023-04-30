@@ -12,6 +12,9 @@ class UserRead(BaseModel):
     username: str
     email: str
     registered_at: datetime.date
+    is_active: bool
+    is_superuser: bool
+    is_verified: bool
 
     class Config:
         orm_mode = True
@@ -22,6 +25,9 @@ class UserCreate(BaseModel):
     email: str
     password: str
     registered_at: datetime.date
+    is_active: bool
+    is_superuser: bool
+    is_verified: bool
 
     class Config:
         orm_mode = True
@@ -31,6 +37,9 @@ class UserUpdate(BaseModel):
     username: str
     email: str
     password: str
+    is_active: bool
+    is_superuser: bool
+    is_verified: bool
 
     class Config:
         orm_mode = True

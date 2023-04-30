@@ -1,13 +1,15 @@
 from importlib.metadata import metadata
 
+from fastapi import Depends
+from fastapi_users_db_sqlalchemy import SQLAlchemyUserDatabase
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import sessionmaker
 
-from models.models import metadata
+from models.models import metadata, User
 
 from utils.db_config import DB_HOST, DB_NAME, DB_PASS, DB_PORT, DB_USER
 
-DATABASE_URL = f"postgresql+asyncpg://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
+DATABASE_URL = f"postgresql+asyncpg://postgres:vebcamera@localhost:5432/tweety_db"
 
 
 async def create_tables():
@@ -30,3 +32,7 @@ async def get_async_session():
             yield session
         finally:
             await session.close()
+
+
+async def get_user_db(session: AsyncSession = Depends(get_async_session)):
+    yield SQLAlchemyUserDatabase(session, User)
