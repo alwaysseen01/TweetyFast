@@ -23,7 +23,7 @@ class UserRead(BaseModel):
 class UserCreate(BaseModel):
     username: str
     email: str
-    password: str
+    hashed_password: str
     registered_at: datetime.date
     is_active: bool
     is_superuser: bool
@@ -36,7 +36,7 @@ class UserCreate(BaseModel):
 class UserUpdate(BaseModel):
     username: str
     email: str
-    password: str
+    hashed_password: str
     is_active: bool
     is_superuser: bool
     is_verified: bool
