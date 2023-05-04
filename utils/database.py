@@ -1,11 +1,9 @@
 from importlib.metadata import metadata
 
-from fastapi import Depends
-from fastapi_users_db_sqlalchemy import SQLAlchemyUserDatabase
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import sessionmaker
 
-from models.models import metadata, User
+from models.models import metadata
 
 from utils.db_config import DB_HOST, DB_NAME, DB_PASS, DB_PORT, DB_USER
 
@@ -32,7 +30,3 @@ async def get_async_session():
             yield session
         finally:
             await session.close()
-
-
-async def get_user_db(session: AsyncSession = Depends(get_async_session)):
-    yield SQLAlchemyUserDatabase(session, User)

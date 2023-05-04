@@ -13,6 +13,10 @@ pytest = {extras = ["all"], version = "^7.3.1"}
 asyncio = "^3.4.3"
 asyncpg = "^0.27.0"
 uvicorn = {extras = ["all"], version = "^0.22.0"}
+environ = "^1.0"
+python-jose = {extras = ["cryptography"], version = "^3.3.0"}
+passlib = {extras = ["bcrypt"], version = "^1.7.4"}
+env = "^0.1.0"
 
 
 [build-system]

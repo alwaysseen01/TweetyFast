@@ -13,7 +13,6 @@ class UserRead(BaseModel):
     email: str
     registered_at: datetime.date
     is_active: bool
-    is_superuser: bool
     is_verified: bool
 
     class Config:
@@ -23,11 +22,10 @@ class UserRead(BaseModel):
 class UserCreate(BaseModel):
     username: str
     email: str
-    hashed_password: str
-    registered_at: datetime.date
+    password: str
     is_active: bool
-    is_superuser: bool
     is_verified: bool
+    registered_at: datetime.date
 
     class Config:
         orm_mode = True
@@ -36,9 +34,8 @@ class UserCreate(BaseModel):
 class UserUpdate(BaseModel):
     username: str
     email: str
-    hashed_password: str
+    password: str
     is_active: bool
-    is_superuser: bool
     is_verified: bool
 
     class Config:
@@ -103,6 +100,57 @@ class HashtagCreate(BaseModel):
 class HashtagUpdate(BaseModel):
     name: str
     updated_at: datetime.date
+
+    class Config:
+        orm_mode = True
+
+
+"""
+Tweet-Hashtag schemas
+"""
+
+
+class TweetHashtagRead(BaseModel):
+    tweet_id: int
+    hashtag_id: int
+
+    class Config:
+        orm_mode = True
+
+
+class TweetHashtagCreate(BaseModel):
+    tweet_id: int
+    hashtag_id: int
+
+    class Config:
+        orm_mode = True
+
+
+"""
+Follower schemas
+"""
+
+
+class FollowerCreate(BaseModel):
+    user_id: int
+    follower_id: int
+    followed_at: datetime.date
+
+    class Config:
+        orm_mode = True
+
+
+"""
+UserProfile schemas
+"""
+
+
+class UserProfileCreate(BaseModel):
+    first_name: str = None
+    last_name: str = None
+    bio: str = None
+    location: str = None
+    website: str = None
 
     class Config:
         orm_mode = True
